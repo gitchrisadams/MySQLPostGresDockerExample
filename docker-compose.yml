@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  # Recent version of mysql.
+  mysql-dev:
+    image: mysql:8.0.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: blogapp
+    ports:
+      - "3308:3306"
+    volumes:
+      - ".my.conf:/etc/mysql/conf.d/config-file.cnf"
+      - "./data:/var/lib/mysql:rw"
+
+  # Legacy version of mysql.
+  mysql-legacy:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: legacyapp
+    ports:
+      - "3309:3306"
+  
+  pgdb:
+    image: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: blogapp
+
+  # For managing database docker containers:
+  admin:
+    image: adminer
+    ports:
+      - 8080:8080
