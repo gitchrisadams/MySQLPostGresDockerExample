@@ -10,7 +10,7 @@ services:
     ports:
       - "3308:3306"
     volumes:
-      - ".my.conf:/etc/mysql/conf.d/config-file.cnf"
+      - "./my.conf:/etc/mysql/conf.d/config-file.cnf"
       - "./data:/var/lib/mysql:rw"
 
   # Legacy version of mysql.
